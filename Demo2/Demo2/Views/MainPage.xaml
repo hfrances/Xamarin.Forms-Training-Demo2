@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Demo2.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Demo2.Views.MainPage">
+    <ContentPage.BindingContext>
+        <vm:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout Orientation="Vertical">
+        <!-- Place new controls here -->
+        <Label Text="Welcome to Xamarin.Forms!" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand" />
+        <Label Style="{StaticResource Key=H1}" Text="{Binding Title}" 
+               d:Text="Mi título"
+               HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand" />
+        <Label Style="{StaticResource Key=H2}" Text="{Binding Subtitle}" 
+               HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand"/>
+        <ListView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label WidthRequest="30" BackgroundColor="{Binding Value}" />
+                            <Label Text="{Binding Name}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Comando 1" Command="{Binding SetValues1Command}" />
+            <Button Text="Comando 2" Command="{Binding SetValues2Command}" CommandParameter="{Binding}" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
